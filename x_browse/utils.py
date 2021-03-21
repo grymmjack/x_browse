@@ -31,12 +31,10 @@ def log(message, log_type=log_types.NOTICE):
     Returns:
         None
     """
-
     if log_type == log_types.ERROR:
         parsed_message = f"[bold red]{message}[/]"
     elif log_type == log_types.WARNING:
         parsed_message = f"[bold yellow]{message}[/]"
     else:
         parsed_message = f"{message}"
-
     print(parsed_message)

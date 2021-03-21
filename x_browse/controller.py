@@ -1,5 +1,7 @@
 import os
 
+from .utils import log, log_types
+
 from .model import BrowseModel
 from .view import BrowseView
 
@@ -12,8 +14,10 @@ class BrowseController:
         """Runs the controller
         Walks the contents of the model data and sets up the shortcuts and
         passes the heavy lifting to the dir_link func to do the work.
+
         Args:
             None
+
         Returns:
             (bool): True if controller runs successfully, False otherwise
         """
@@ -22,11 +26,15 @@ class BrowseController:
         for src_dir, dst_dir in model.data.items():
             i += 1
             dir_linked = self.dir_link(
-                f"'{os.getcwd()}{os.sep}{i:03} {src_dir}'",
-                f"'E:{os.sep}Music{os.sep}{dst_dir}'"
+                f"{i:03} {src_dir}",
+                f"E:{os.sep}Music{os.sep}{dst_dir}"
             )
-            if dir_linked:
-                pass
+            if not dir_linked:
+                # Something didn't work
+                return False
+        
+        # Everything worked
+        return True
 
     @staticmethod
     def dir_link(src_dir, dst_dir):
@@ -38,16 +46,9 @@ class BrowseController:
         Returns:
             (bool): True if directory link made successfully, False otherwise
         """
-        import subprocess
-        cmds = [
-            "mklink",
-            "/D",
-            src_dir,
-            dst_dir
-        ]
-        print(" ".join(cmds).replace("'", '"'))
         try:
-            subprocess.run(cmds)
+            log(f"Creating symlink: {src_dir} [red]:right_arrow:[/] {dst_dir}", log_types.NOTICE)
+            os.symlink(dst_dir, src_dir, target_is_directory=True)
         except:
             return False
         return True

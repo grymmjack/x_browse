@@ -31,7 +31,8 @@ class BrowseController:
             )
             if not dir_linked:
                 # Something didn't work
-                return False
+                # return False
+                pass
         
         # Everything worked
         return True

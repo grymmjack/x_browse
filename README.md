@@ -3,6 +3,14 @@ Port of _setup.php for X:\!BROWSE!
 
 This helps me find things fast, and uses `mklink /D` on Windows.
 
+## Installation
+python setup.py develop
+
+## Run (in admin cmd.exe)
+cd X:\!BROWSE!
+python -m x_browse
+
+
 ```php
 <?php
 $base_dir = getcwd();

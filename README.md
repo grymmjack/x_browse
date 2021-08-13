@@ -1,7 +1,6 @@
 # x_browse
 Port of _setup.php for X:\!BROWSE!
-
-This helps me find things fast, and uses `mklink /D` on Windows.
+(an old PHP project I used for helping me find things fast, and uses `mklink /D` on Windows.)
 
 ## Installation
 python setup.py develop
